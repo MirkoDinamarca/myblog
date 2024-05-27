@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Post;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -10,14 +11,16 @@ class CategoryController extends Controller
      * Muestra todas las categorías
      */
     public function getIndex() {
-        return view('category.index');
+        $data['posts'] = Post::all();
+        return view('category.index', $data);
     }
 
     /**
      * Obtiene el ID de la categoría por parámetro y se visualiza individualmente
      */
     public function getShow($id) {
-        return view('category.show');
+        $data['post'] = Post::findOrFail($id);
+        return view('category.show', $data);
     }
 
     /**
@@ -31,7 +34,8 @@ class CategoryController extends Controller
      * Vista para editar una categoría
      */
     public function getEdit($id) {
-        return view('category.edit');
+        $data['post'] = Post::findOrFail($id);
+        return view('category.edit', $data);
     }
 
 }
