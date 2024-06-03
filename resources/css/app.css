@@ -3,8 +3,8 @@
 @tailwind utilities;
 
 .bg-mod {
-    background-color: #292929;
-    color: #E4E2DD;
+    background-color: #292929!important;
+    color: #E4E2DD!important;
 }
 
 .bg_color_primary {

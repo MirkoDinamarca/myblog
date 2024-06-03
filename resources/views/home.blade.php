@@ -30,13 +30,11 @@
             padding: 20px
         }
     </style>
-    {{-- <div id="OverviewText4">
-    </div> --}}
     <div id="bg_image_first_blog">
 
-        <article class="bg_color_primary c_black p-10 w-2/5">
-            <span class="font-semibold">2min | Blog recomendado</span>
-            <h2 class="text-3xl font-bold">Groove, Jazz y Melancolía</h2>
+        <article class="bg_color_primary c_black p-10 md:w-2/3 xl:w-2/5">
+            <span class="font-semibold text-sm">2min | Blog recomendado</span>
+            <h2 class="text-xl md:text-3xl font-bold">Groove, Jazz y Melancolía</h2>
 
             <p class="text-sm">
                 Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iste dolorum architecto quo vel voluptatem
