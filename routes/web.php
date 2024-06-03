@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -31,6 +32,16 @@ Route::middleware('auth')->group(function () {
     // Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
     // Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+        
 });
+// Ruta para mostrar la vista de edición
+Route::get('category/edit/{id}', [CategoryController::class, 'getEdit'])->name('category.edit');
 
-require __DIR__.'/auth.php';
+// Ruta para actualizar el post
+Route::put('category/update/{id}', [CategoryController::class, 'update'])->name('category.update');
+
+Route::get('category/show/{id}', [CategoryController::class, 'getShow'])->name('category.show');
+
+
+
+

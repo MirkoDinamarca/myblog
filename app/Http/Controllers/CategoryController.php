@@ -37,5 +37,29 @@ class CategoryController extends Controller
         $data['post'] = Post::findOrFail($id);
         return view('category.edit', $data);
     }
+    /**
+     * Vista para actualizar la categoria 
+     */
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'title' => 'required|max:255',
+            'content' => 'required',
+           
+        ]);
+    
+        // Encuentra el post por su ID
+        $post = Post::findOrFail($id);
+   
+    
+      
+        $post->update($request->only(['title', 'content']));
+    
+       
+        return redirect()->route('category.edit', ['id' => $post->id])
+            ->with('success', 'Post actualizado .');
+    }
+    
+    
 
 }
