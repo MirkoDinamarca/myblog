@@ -1,3 +1,21 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.bg-mod {
+    background-color: #292929!important;
+    color: #E4E2DD!important;
+}
+
+.bg_color_primary {
+    background-color: #E4E2DD;
+}
+.bg_color_secondary {
+    background-color: #292929;
+}
+.c_black {
+    color: #292929;
+}
+.c_primary {
+    color: #E4E2DD;
+}
