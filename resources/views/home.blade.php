@@ -62,6 +62,57 @@
         {{-- <img src="{{ asset('images/first_blog_bg.jpg') }}" alt="First Blog Image"> --}}
     </div>
 
+    {{-- //CONSULTAR ESTO, para ver posts --}}
+    {{-- @foreach($posts as $post)
+            <li>
+                <h2>{{ $post->title }}</h2>
+                <p>{{ $post->content }}</p>
+                <img src="{{ $post->poster }}" alt="{{ $post->title }}" style="width:200px;">
+            </li>
+        @endforeach 
+        
+    PARA CREAR POSTS!!! VALIDANDO METODO STORE EN CONTROLADOR   
+    <h1>Create Post</h1>
+
+    @if ($errors->any())
+        <div>
+            <strong>Rechazado</strong> Surgieron algunos problemas con la información.<br><br>
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
+    <form action="{{ route('posts.store') }}" method="POST">
+        @csrf
+        <div>
+            <label for="title">Titulo:</label>
+            <input type="text" name="title" id="title" required>
+        </div>
+        <div>
+            <label for="poster">Creador URL:</label>
+            <input type="text" name="poster" id="poster" required>
+        </div>
+        <div>
+            <label for="habilitated">Habilitado:</label>
+            <select name="habilitated" id="habilitated" required>
+                <option value="1">Visible</option>
+                <option value="0">No visible</option>
+            </select>
+        </div>
+        <div>
+            <label for="content">Contenido:</label>
+            <textarea name="content" id="content" required></textarea>
+        </div>
+        <button type="submit">Crear</button>
+    </form>
+        
+        --}}
+
+
+
     {{--
         Contenido donde se van a mostrar los blogs
         Se puede descomentar, pero aún está en desarrollo

@@ -10,10 +10,41 @@ class CategoryController extends Controller
     /**
      * Muestra todas las categorías
      */
-    public function getIndex() {
-        $data['posts'] = Post::all();
+    public function getIndex() 
+    {
+        // Obtener solo los posts donde 'habilitated' es 1 (visibles)
+        $data['posts'] = Post::where('habilitated', 1)->get();
         return view('category.index', $data);
     }
+    /* {
+        $data['posts'] = Post::all();
+        return view('category.index', $data);
+    } */
+
+    //CONSULTAR ESTO!!!!
+    /* 
+
+     public function create()
+    {
+        return view('posts.create');
+    }
+    */
+    
+    
+    public function store(Request $request)
+    {
+        $request->validate([
+            'title' => 'required',
+            'poster' => 'required',
+            'habilitated' => 'required|boolean',
+            'content' => 'required',
+        ]);
+
+        Post::create($request->all());
+
+        return redirect()->route('posts.index')
+                         ->with('success', 'Post creado con exito!!');
+    } 
 
     /**
      * Obtiene el ID de la categoría por parámetro y se visualiza individualmente
@@ -45,21 +76,14 @@ class CategoryController extends Controller
         $request->validate([
             'title' => 'required|max:255',
             'content' => 'required',
-           
         ]);
     
         // Encuentra el post por su ID
         $post = Post::findOrFail($id);
-   
-    
-      
         $post->update($request->only(['title', 'content']));
     
-       
         return redirect()->route('category.edit', ['id' => $post->id])
             ->with('success', 'Post actualizado .');
     }
     
-    
-
 }
