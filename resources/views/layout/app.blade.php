@@ -53,7 +53,7 @@
                         @auth()
                             <a id="user_perfil"
                                 class="inline-flex justify-center items-center cursor-pointer bg-gray-100 bg-opacity-20 w-60 p-2 font-semibold rounded-sm">
-                                ¡Bienvenido {{ auth()->user()->name }}! <i class="fa-solid fa-angle-down ms-2"></i>
+                                ¡Bienvenido/da {{ auth()->user()->name }}! <i class="fa-solid fa-angle-down ms-2"></i>
                             </a>
                             <div id="panel_user"
                                 class="absolute hidden bg-mod p-3 z-10 mt-2 right-0 border rounded border-gray-600 w-60 text-sm">
@@ -63,6 +63,13 @@
                                         <a href="{{ route('profile.show') }}" class="block"><i
                                                 class="fa-regular fa-user"></i> Mi Perfil</a>
                                     </li>
+                                    @if (auth()->user()->superadmin)
+                                        <li
+                                            class="py-1 px-2 hover:bg-gray-500 transition-all duration-100 cursor-pointer text-left">
+                                            <a href="{{ route('usuarios') }}" class="block"><i
+                                                    class="fa-solid fa-users"></i> Usuarios</a>
+                                        </li>
+                                    @endif
                                     <li
                                         class="py-1 px-2 hover:bg-gray-500 transition-all duration-100 cursor-pointer text-left">
                                         <a href="#"><i class="fa-solid fa-clipboard-list"></i> Mis Blogs</a>

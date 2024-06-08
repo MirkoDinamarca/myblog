@@ -1,9 +1,11 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,6 +22,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/login', [AuthenticatedSessionController::class, 'create']);
 Route::post('/login', [AuthenticatedSessionController::class, 'store'])->name('login');
 Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
+Route::get('/register', [RegisteredUserController::class, 'create'])->name('register');
+Route::post('/register', [RegisteredUserController::class, 'store'])->name('register');
 
 
 Route::get('/', [HomeController::class, 'getHome'])->name('/');
@@ -35,6 +39,9 @@ Route::middleware('auth')->group(function () {
     Route::get('category/create', [CategoryController::class, 'getCreate'])->name('category.create');
     Route::post('category/create', [CategoryController::class, 'store'])->name('category.store');
 
+    Route::get('/usuarios', [UserController::class, 'index'])->name('usuarios');
+    Route::get('/usuarios/{id}', [UserController::class, 'show'])->name('usuarios.show');
+    Route::put('/usuarios/update', [UserController::class, 'update'])->name('usuarios.update');
 });
 // Ruta para mostrar la vista de edición
 Route::get('category/edit/{id}', [CategoryController::class, 'getEdit'])->name('category.edit');
