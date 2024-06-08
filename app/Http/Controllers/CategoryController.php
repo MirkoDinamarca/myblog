@@ -10,41 +10,39 @@ class CategoryController extends Controller
     /**
      * Muestra todas las categorías
      */
-    public function getIndex() 
+    public function getIndex()
     {
         // Obtener solo los posts donde 'habilitated' es 1 (visibles)
         $data['posts'] = Post::where('habilitated', 1)->get();
         return view('category.index', $data);
     }
-    /* {
-        $data['posts'] = Post::all();
-        return view('category.index', $data);
-    } */
 
-    //CONSULTAR ESTO!!!!
-    /* 
-
-     public function create()
-    {
-        return view('posts.create');
-    }
-    */
-    
-    
+    /**
+     * Almacena los datos del blog en bd
+     */
     public function store(Request $request)
     {
         $request->validate([
             'title' => 'required',
-            'poster' => 'required',
-            'habilitated' => 'required|boolean',
+            'poster' => 'required|image|mimes:jpeg,png,jpg|max:2048',
             'content' => 'required',
         ]);
 
-        Post::create($request->all());
+        // Almacenar img del blog
+        $img = $request->file('poster');
+        $img_name = time() . '.' . $img->getClientOriginalExtension();
+        $img->move(public_path('uploads/blogs'), $img_name);
 
-        return redirect()->route('posts.index')
-                         ->with('success', 'Post creado con exito!!');
-    } 
+        Post::create([
+            'title' => $request->title,
+            'poster' => $img_name,
+            'content' => $request->content,
+            'user_id' => auth()->user()->id
+        ]);
+
+        return redirect()->route('/')
+                         ->with('success', 'El blog se ha creado con éxito');
+    }
 
     /**
      * Obtiene el ID de la categoría por parámetro y se visualiza individualmente
@@ -69,7 +67,7 @@ class CategoryController extends Controller
         return view('category.edit', $data);
     }
     /**
-     * Vista para actualizar la categoria 
+     * Vista para actualizar la categoria
      */
     public function update(Request $request, $id)
     {
@@ -77,13 +75,13 @@ class CategoryController extends Controller
             'title' => 'required|max:255',
             'content' => 'required',
         ]);
-    
+
         // Encuentra el post por su ID
         $post = Post::findOrFail($id);
         $post->update($request->only(['title', 'content']));
-    
+
         return redirect()->route('category.edit', ['id' => $post->id])
             ->with('success', 'Post actualizado .');
     }
-    
+
 }

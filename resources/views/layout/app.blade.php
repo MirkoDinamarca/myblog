@@ -10,7 +10,7 @@
 
 </head>
 
-<body class="container mx-auto my-5 bg-mod">
+<body class="container mx-auto bg-mod relative min-h-screen">
     <header>
         <nav class="flex flex-col xl:flex-row gap-3 justify-center items-center">
             <article class="flex-1 p-1">
@@ -22,9 +22,9 @@
                 <ul class="flex xl:flex-row flex-wrap xl:flex-nowrap items-center gap-5 justify-center text-center">
                     @auth
                         <li class="cursor-pointer w-full xl:me-10">
-                            <button
+                            <a href="{{ route('category.create') }}"
                                 class="border px-2 py-1 rounded hover:bg-gray-600 bg-opacity-90 transition-all duration-150"><i
-                                    class="fa-solid fa-plus"></i> Crear un nuevo blog</button>
+                                    class="fa-solid fa-plus"></i> Crear un nuevo blog</a>
                         </li>
                     @endauth
                     <li class="cursor-pointer hover:scale-125 transition-transform duration-150">
@@ -93,25 +93,8 @@
         @yield('contenido')
     </main>
 
-    <footer class="fixed container bottom-0">
-        <nav class="flex gap-3">
-            <article class="flex-1 p-5" style="border-top: 1px solid black">
-                <h4 class="text-xl"><b>My</b>Blog</h4>
-                <p>Copyright 2024 - Todos los derechos reservados</p>
-            </article>
-            <article class="flex-1 p-5 flex justify-evenly gap-3" style="border-top: 1px solid black">
-                <div class="flex gap-3">
-                    <div class="w-7 h-7 bg-gray-400 rounded-md"></div>
-                    <div class="w-7 h-7 bg-gray-400 rounded-md"></div>
-                    <div class="w-7 h-7 bg-gray-400 rounded-md"></div>
-                </div>
-                <div class="flex gap-10">
-                    <p>Blog</p>
-                    <p>About us</p>
-                    <p>Get in touch</p>
-                </div>
-            </article>
-        </nav>
+    <footer class="absolute container bottom-0 py-3 text-center font-semibold tracking-wider">
+        © Todos los derechos reservados - 2024
     </footer>
 </body>
 

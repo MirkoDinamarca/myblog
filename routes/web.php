@@ -32,7 +32,9 @@ Route::middleware('auth')->group(function () {
     // Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
     // Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-        
+    Route::get('category/create', [CategoryController::class, 'getCreate'])->name('category.create');
+    Route::post('category/create', [CategoryController::class, 'store'])->name('category.store');
+
 });
 // Ruta para mostrar la vista de edición
 Route::get('category/edit/{id}', [CategoryController::class, 'getEdit'])->name('category.edit');
