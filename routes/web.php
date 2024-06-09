@@ -45,6 +45,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/usuarios', [UserController::class, 'index'])->name('usuarios');
     Route::get('/usuarios/{id}', [UserController::class, 'show'])->name('usuarios.show');
     Route::put('/usuarios/update', [UserController::class, 'update'])->name('usuarios.update');
+    
+    Route::get('/profile/posts', [CategoryController::class, 'getUserPosts'])->name('profile.posts');
 });
 // Ruta para mostrar la vista de edición
 Route::get('category/edit/{id}', [CategoryController::class, 'getEdit'])->name('category.edit');

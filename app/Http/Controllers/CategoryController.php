@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CategoryController extends Controller
 {
@@ -99,6 +100,13 @@ class CategoryController extends Controller
 
         return redirect()->route('category.edit', ['id' => $post->id])
             ->with('success', 'Post actualizado.');
+    }
+
+    public function getUserPosts()
+    {
+        $userId = Auth::id();
+        $data['posts'] = Post::where('usuario_id', $userId)->get();
+        return view('blogs.index', $data);
     }
 
 }
