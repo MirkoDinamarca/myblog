@@ -93,7 +93,7 @@ class CategoryController extends Controller
     {
         $userId = Auth::id();
         $data['posts'] = Post::where('usuario_id', $userId)->get();
-        return view('category.user_posts', $data);
+        return view('blogs.index', $data);
     }
     
 }
