@@ -96,11 +96,11 @@
         </nav>
     </header>
 
-    <main>
+    <main  style="margin-bottom: 50px;">
         @yield('contenido')
     </main>
 
-    <footer class="absolute container bottom-0 py-3 text-center font-semibold tracking-wider">
+    <footer class="absolute container bottom-0 py-3 text-center font-semibold tracking-wider" >
         © Todos los derechos reservados - 2024
     </footer>
 </body>

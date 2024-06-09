@@ -74,14 +74,31 @@ class CategoryController extends Controller
         $request->validate([
             'title' => 'required|max:255',
             'content' => 'required',
+            'poster' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
         ]);
 
         // Encuentra el post por su ID
         $post = Post::findOrFail($id);
+
+        // Manejo de la imagen
+        if ($request->hasFile('poster')) {
+            // Eliminar la imagen anterior si existe
+            if ($post->poster && file_exists(public_path('uploads/blogs/' . $post->poster))) {
+                unlink(public_path('uploads/blogs/' . $post->poster));
+            }
+
+            // Guardar la nueva imagen
+            $img = $request->file('poster');
+            $img_name = time() . '.' . $img->getClientOriginalExtension();
+            $img->move(public_path('uploads/blogs'), $img_name);
+            $post->poster = $img_name;
+        }
+
+        // Actualizar el resto de los campos
         $post->update($request->only(['title', 'content']));
 
         return redirect()->route('category.edit', ['id' => $post->id])
-            ->with('success', 'Post actualizado .');
+            ->with('success', 'Post actualizado.');
     }
 
 }
