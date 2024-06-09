@@ -42,13 +42,14 @@ class CategoryController extends Controller
         ]);
 
         return redirect()->route('/')
-                         ->with('success', 'El blog se ha creado con éxito');
+            ->with('success', 'El blog se ha creado con éxito');
     }
 
     /**
      * Obtiene el ID de la categoría por parámetro y se visualiza individualmente
      */
-    public function getShow($id) {
+    public function getShow($id)
+    {
         $data['post'] = Post::findOrFail($id);
         return view('category.show', $data);
     }
@@ -56,14 +57,16 @@ class CategoryController extends Controller
     /**
      * Vista para crear una nueva categoría
      */
-    public function getCreate() {
+    public function getCreate()
+    {
         return view('category.create');
     }
 
     /**
      * Vista para editar una categoría
      */
-    public function getEdit($id) {
+    public function getEdit($id)
+    {
         $data['post'] = Post::findOrFail($id);
         return view('category.edit', $data);
     }
@@ -105,8 +108,21 @@ class CategoryController extends Controller
     public function getUserPosts()
     {
         $userId = Auth::id();
-        $data['posts'] = Post::where('usuario_id', $userId)->get();
+        $data['posts'] = Post::where('user_id', $userId)->get();
         return view('blogs.index', $data);
     }
 
+    public function changeStatePost($post_id)
+    {
+        $post = Post::find($post_id);
+
+        if ($post->habilitated) {
+            $post->habilitated = 0;
+        } else {
+            $post->habilitated = 1;
+        }
+
+        $post->save();
+        return back()->with('success', '¡Se cambió el estado del blog correctamente!');
+    }
 }

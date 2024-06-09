@@ -72,7 +72,7 @@
                                     @endif
                                     <li
                                         class="py-1 px-2 hover:bg-gray-500 transition-all duration-100 cursor-pointer text-left">
-                                        <a href="#"><i class="fa-solid fa-clipboard-list"></i> Mis Blogs</a>
+                                        <a href="{{ route('profile.posts') }}"><i class="fa-solid fa-clipboard-list"></i> Mis Blogs</a>
                                     </li>
                                     <li
                                         class="py-1 px-2 hover:bg-gray-500 transition-all duration-100 cursor-pointer text-left">

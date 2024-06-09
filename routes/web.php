@@ -40,13 +40,14 @@ Route::middleware('auth')->group(function () {
     Route::get('category/create', [CategoryController::class, 'getCreate'])->name('category.create');
     Route::post('category/create', [CategoryController::class, 'store'])->name('category.store');
     Route::get('category/index', [CategoryController::class, 'getIndex'])->name('category.index');
+    Route::get('/profile/posts', [CategoryController::class, 'getUserPosts'])->name('profile.posts');
+    Route::put('/profile/state/post/{id}', [CategoryController::class, 'changeStatePost'])->name('profile.change.post');
 
     # Usuarios
     Route::get('/usuarios', [UserController::class, 'index'])->name('usuarios');
     Route::get('/usuarios/{id}', [UserController::class, 'show'])->name('usuarios.show');
     Route::put('/usuarios/update', [UserController::class, 'update'])->name('usuarios.update');
-    
-    Route::get('/profile/posts', [CategoryController::class, 'getUserPosts'])->name('profile.posts');
+
 });
 // Ruta para mostrar la vista de edición
 Route::get('category/edit/{id}', [CategoryController::class, 'getEdit'])->name('category.edit');
