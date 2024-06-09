@@ -46,8 +46,7 @@
                     <div class="col-span-2">
                         <label class="font-semibold tracking-wider">Descripción</label>
                         <textarea class="block w-full bg-gray-600 rounded-md border shadow placeholder:text-gray-300" name="content"
-                            cols="30" rows="5" placeholder="Ingrese una descripción del blog - Máximo 400 caracteres"
-                            maxlength="400"></textarea>
+                            cols="30" rows="5" placeholder="Ingrese una descripción del blog"></textarea>
                         @error('content')
                             <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                         @enderror

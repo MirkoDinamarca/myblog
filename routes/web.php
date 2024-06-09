@@ -32,13 +32,16 @@ Route::get('/', [HomeController::class, 'getHome'])->name('/');
 // })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
+    # Perfil de usuario
     Route::get('/profile', [ProfileController::class, 'show'])->name('profile.show');
-    // Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    // Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    # Blogs
     Route::get('category/create', [CategoryController::class, 'getCreate'])->name('category.create');
     Route::post('category/create', [CategoryController::class, 'store'])->name('category.store');
+    Route::get('category/index', [CategoryController::class, 'getIndex'])->name('category.index');
 
+    # Usuarios
     Route::get('/usuarios', [UserController::class, 'index'])->name('usuarios');
     Route::get('/usuarios/{id}', [UserController::class, 'show'])->name('usuarios.show');
     Route::put('/usuarios/update', [UserController::class, 'update'])->name('usuarios.update');
