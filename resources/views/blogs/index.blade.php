@@ -12,11 +12,12 @@
         </div>
     @endif
 
-    <section class="mt-5">
+    <section class="container mx-auto my-4 p-2 max-w-7xl  rounded-lg">
         <ul>
             @foreach ($posts as $p)
                 <li class="mt-3">
-                    <article class="bg-gray-700 p-3 rounded-md grid grid-cols-6 gap-3">
+                <a href="{{ route('category.show', ['id' => $p->id]) }}">
+                <article class="p-3 rounded-md shadow-md  grid grid-cols-6 gap-3"> <!-- Agregar sombra y bordes redondeados -->
                         <div class="col-span-5 flex gap-3">
 
                             {{-- Imagen del blog --}}
@@ -27,47 +28,36 @@
                             </div>
 
                             <div class="flex flex-col w-full">
-                                <h2 class="text-2xl">{{ $p->title }}</h2>
+                                <h2 class="text-2xl font-bold ">{{ $p->title }}</h2>
                                 <small class="font-semibold tracking-wide">Fecha de edición
                                     {{ $p->updated_at->format('d') }} de
                                     {{ $p->updated_at->locale('es')->monthName }}, {{ $p->updated_at->format('Y') }} -
                                     {{ $p->updated_at->format('H:i') }} hs</b></small>
 
-                                <div class="flex justify-between border-b border-gray-600 pb-2">
-                                    <label class="mt-2 font-semibold tracking-wide">Descripción del blog</label>
-                                    @if ($p->habilitated)
-                                        <label class="mt-2 tracking-wide text-green-400"><em>Blog habilitado</em></label>
-                                    @else
-                                        <label class="mt-2 tracking-wide text-red-400"><em>Blog inhabilitado</em></label>
-                                    @endif
-                                </div>
-                                <textarea rows="2" class="bg-transparent border-none focus:outline-none focus:ring-0 focus:border-none" readonly>{{ $p->content }}</textarea>
-                            </div>
-                        </div>
-                        <div class="col-span-1">
-
-                            {{-- Acciones --}}
-                            <div class="">
-                                <a href="{{ route('category.show', $p->id) }} "
-                                    class="bg-white text-gray-800 py-1 px-3 font-bold rounded-sm hover:bg-gray-100">Ver blog
-                                    completo</a>
+                                <div class="flex justify-between ">
                                 <form action="{{ route('profile.change.post', $p->id) }}" method="POST">
                                     @csrf
                                     @method('PUT')
 
                                     @if ($p->habilitated)
-                                    <button type="submit" class="bg-red-600 bg-opacity-50 text-white py-1 px-3 font-bold rounded-sm mt-3 hover:bg-red-700">Inhabilitar blog</button>
+                                    <button type="submit" class="bg-gray-600 bg-opacity-50 text-white py-1 px-1  rounded-md mt-2 hover:bg-black"><i class="fas fa-lock-open"></i> Publico</button>
+                                    
                                     @else
-                                    <button type="submit" class="bg-green-600 bg-opacity-50 text-white py-1 px-3 font-bold rounded-sm mt-3 hover:bg-green-700">Habilitar blog</button>
+                                    <button type="submit" class="bg-gray-600 bg-opacity-50 text-white py-1 px-1  rounded-md mt-2 hover:bg-black"><i class="fas fa-lock"></i> Privado</button>
                                     @endif
                                 </form>
+        
+                                </div>
+                               
+                               
                             </div>
                         </div>
+                     
 
                     </article>
                 </li>
-
-                <hr class="my-3 border border-gray-400">
+                </a>
+                
             @endforeach
         </ul>
 

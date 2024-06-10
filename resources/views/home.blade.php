@@ -3,6 +3,25 @@
 @section('contenido')
     {{-- <h2 class="text-4xl font-bold text-center">Home</h2> --}}
     <style>
+        
+        .divider {
+            display: flex;
+            align-items: center;
+            text-align: center;
+        }
+        .divider::before,
+        .divider::after {
+            content: '';
+            flex: 1;
+            border-bottom: 1px solid #d1d5db; /* Tailwind's gray-300 */
+        }
+        .divider::before {
+            margin-right: 0.5em;
+        }
+        .divider::after {
+            margin-left: 0.5em;
+        }
+   
         #OverviewText4 {
             position: relative;
         }
@@ -149,4 +168,38 @@
             <img src="{{ asset('images/blog_1.jpeg') }}" class="rounded-t-2xl rounded-r-2xl">
         </article>
     </section> --}}
+
+
+    <div class="container mx-auto my-4 p-2 max-w-7xl  rounded-lg ">
+    <div class="relative my-8">
+            <div class="divider">
+                <h1 class="text-2xl font-bold text-center">BLOGS MAS RECIENTES</h1>
+            </div>
+        </div>
+
+    @if($posts->isEmpty())
+        <p>No hay blogs en este momento.</p>
+    @else
+    <div class="flex flex-wrap -mx-1">
+        @foreach($posts as $post)
+            <div class="max-w-sm mx-auto bg-white rounded-lg shadow-md overflow-hidden">
+            <div class="relative" style="padding-top: 56.25%;"> 
+                                <img src="{{ asset('uploads/blogs/' . $post->poster) }}" alt="{{ $post->title }}" class="absolute inset-0 w-full h-full object-cover">
+                            </div>
+                <div class="p-6">
+                    <h2 class="text-xl font-bold text-gray-800 mb-2">{{ $post->title }}</h2>
+                    <p class="text-gray-600 mb-4">{{ \Illuminate\Support\Str::limit($post->content, 100, '...') }}</p>
+                    <a href="{{ route('category.show', ['id' => $post->id]) }}" class="bg-gray-500 hover:bg-gray-800  hover:text-white text-white py-2 px-6 font-bold rounded-sm hover:bg-gray-100">
+                    Leer mas</a>
+                </div>
+            
+            </div>
+        @endforeach
+        
+    </div>
+       
+    @endif
+    </div>
+
+
 @endsection
