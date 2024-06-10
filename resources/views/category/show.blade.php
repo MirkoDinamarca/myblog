@@ -9,12 +9,14 @@
             <div class="titulo absolute bottom-0 left-0 right-0 flex justify-center items-center rounded-b-md"
                 style="background: linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%);">
                 <p class="  mb-6 text-white text-3xl font-bold uppercase">{{ $post->title }}</p>
-                @if ($post->user->id == auth()->user()->id || auth()->user()->superadmin)
-                    <div class="absolute top-0 right-0 mr-2 mt-2">
-                        <a href="{{ route('category.edit', ['id' => $post->id]) }}"
-                            class="bg-gray-700 hover:bg-gray-500 text-white font-bold py-2 px-4 rounded">
-                            <i class="fas fa-edit"></i> Editar </a>
-                    </div>
+                @if (auth()->user())
+                    @if ($post->user->id == auth()->user()->id || auth()->user()->superadmin)
+                        <div class="absolute top-0 right-0 mr-2 mt-2">
+                            <a href="{{ route('category.edit', ['id' => $post->id]) }}"
+                                class="bg-gray-700 hover:bg-gray-500 text-white font-bold py-2 px-4 rounded">
+                                <i class="fas fa-edit"></i> Editar </a>
+                        </div>
+                    @endif
                 @endif
             </div>
         </div>
@@ -31,7 +33,8 @@
         </div>
 
         <div class="contenido mb-3" style="text-align: justify; line-height: 1.5; font-family: 'Arial', sans-serif;">
-            <textarea name="" id="" cols="30" rows="10" class="w-full p-0 text-lg bg-transparent border-none focus:outline-none focus:ring-0 focus:border-none" readonly>{{ $post->content }}</textarea>
+            <textarea name="" id="" cols="30" rows="10"
+                class="w-full p-0 text-lg bg-transparent border-none focus:outline-none focus:ring-0 focus:border-none" readonly>{{ $post->content }}</textarea>
             {{-- <p style="font-size: 22px;">{{ $post->content }}</p> --}}
         </div>
 

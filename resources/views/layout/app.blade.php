@@ -96,7 +96,7 @@
         </nav>
     </header>
 
-    <main  style="margin-bottom: 50px;">
+    <main class="mb-16">
         @yield('contenido')
     </main>
 
